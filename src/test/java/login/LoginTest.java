@@ -5,11 +5,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.SecurePage;
 
 public class LoginTest {
     private WebDriver driver;
     private HomePage homePage;
     private LoginPage loginPage;
+    private SecurePage securePage;
 
     @Test
     public void loginForm(){
@@ -17,6 +19,7 @@ public class LoginTest {
 
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
+        securePage = new SecurePage(driver);
 
         driver.get("https://the-internet.herokuapp.com/");
         homePage.clickLoginLink();
@@ -24,5 +27,7 @@ public class LoginTest {
         //Method Chaining
         loginPage.loginMethod("tomsmith" , "SuperSecretPassword!").clickLoginButton();
         // loginPage.clickLoginButton();
+
+        securePage.assertOnSecureText();
     }
 }
